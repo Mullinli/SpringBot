@@ -1,0 +1,53 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+}
+
+group = 'mullinli'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.5'
+	implementation 'org.springframework.data:spring-data-commons:2.7.5'
+	implementation 'org.springframework.kafka:spring-kafka:2.9.0'
+	implementation 'org.postgresql:postgresql:42.5.0'
+	implementation 'com.h2database:h2:2.1.214'
+
+	implementation group: 'org.telegram', name: 'telegrambots-abilities', version: '5.3.0'
+	implementation group: 'org.telegram', name: 'telegrambots', version: '5.3.0'
+
+	testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.2'
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+configurations.all {
+	exclude module: 'slf4j-log4j12'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
+
+
